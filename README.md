@@ -157,7 +157,7 @@ The schema may evolve with implementation.
 
 ## Installation and Quick Start
 
-> The repository currently contains no application code, so there is nothing to run yet. The steps below set up the development environment and will work once dependency files are added.
+>to be added
 
 ### Prerequisites
 
