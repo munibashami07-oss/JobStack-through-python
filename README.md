@@ -266,7 +266,7 @@ Contributions are welcome in data engineering, analytics, machine learning, back
 1. **Check existing work.** Review [open issues](https://github.com/munibashami07-oss/JobStack-through-python/issues) and [pull requests](https://github.com/munibashami07-oss/JobStack-through-python/pulls). For a significant change, open an issue first to agree on scope.
 2. **Fork** the repository, then clone your fork:
    ```bash
-   git clone https://github.com/<your-username>/JobStack-through-python.git
+   git clone https://github.com/munibashami07-oss/JobStack-through-python.git
    cd JobStack-through-python
    ```
 3. **Create a focused branch** from `main`:
