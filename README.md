@@ -2,11 +2,16 @@
 
 **Turn Pakistan tech job-postings data into skills intelligence, salary and fit prediction, and evidence-based career decisions.**
 
-![Status: in development](https://img.shields.io/badge/status-in%20development-orange)
+![Status: early development](https://img.shields.io/badge/status-early%20development-orange)
 ![Focus: Pakistan tech market](https://img.shields.io/badge/focus-Pakistan%20tech%20market-5B45E8)
+![Language: Python](https://img.shields.io/badge/language-Python-3776AB)
 ![License: TBD](https://img.shields.io/badge/license-TBD-lightgrey)
 
 > **North star:** Don't build a website that merely tells people where jobs are. Build a system that helps them understand the market and decide what to do next.
+
+## Project Status
+
+JobStack is in **early development**. The repository currently contains the project documentation only. The pipeline, models, API, and dashboard described below are planned and **not yet implemented**. Sections marked *Planned* describe the intended design and will be updated as code is added.
 
 ## Contents
 
@@ -37,9 +42,7 @@ JobStack adds a structured, evidence-driven layer between raw postings and pract
 | Engineering leaders | Compare recurring skill requirements across roles |
 | Universities and training providers | Relate job-market demand to learning outcomes |
 
-### Features
-
-> Features describe the intended scope and are not necessarily implemented yet.
+### Planned features
 
 **Market intelligence**
 - Skill demand by role, city, experience level, and time period
@@ -59,19 +62,19 @@ JobStack adds a structured, evidence-driven layer between raw postings and pract
 
 ### Roadmap
 
-| Stage | Focus | Deliverables |
-|---|---|---|
-| 1. Data foundation | ETL, validation, SQL, EDA | Documented source, validated dataset, normalized schema, findings |
-| 2. Classical ML | Salary estimation and job-fit baseline | Pipeline, cross-validation, tuning, held-out evaluation |
-| 3. Deep learning and MLOps | PyTorch matching, Optuna, MLflow | Neural model, optimization study, baseline comparison |
-| Product layer | Web app and REST API | Dashboard, filters, visualizations, model outputs |
-| Validation | Professional feedback | Structured feedback and documented improvements |
+| Stage | Focus | Deliverables | Status |
+|---|---|---|---|
+| 1. Data foundation | ETL, validation, SQL, EDA | Documented source, validated dataset, normalized schema, findings | Not started |
+| 2. Classical ML | Salary estimation and job-fit baseline | Pipeline, cross-validation, tuning, held-out evaluation | Not started |
+| 3. Deep learning and MLOps | PyTorch matching, Optuna, MLflow | Neural model, optimization study, baseline comparison | Not started |
+| Product layer | Web app and REST API | Dashboard, filters, visualizations, model outputs | Not started |
+| Validation | Professional feedback | Structured feedback and documented improvements | Not started |
 
 ---
 
 ## Tech Stack and Architecture
 
-### Tech stack
+### Tech stack (planned)
 
 | Layer | Tools | Purpose |
 |---|---|---|
@@ -87,7 +90,7 @@ JobStack adds a structured, evidence-driven layer between raw postings and pract
 | Backend | FastAPI | REST API |
 | Frontend | React (or team-approved framework) | Interactive dashboard |
 
-Exact dependencies and versions should be confirmed in the repository as implementation progresses.
+Exact dependencies and versions will be fixed in the repository as implementation progresses.
 
 ### Architecture
 
@@ -128,7 +131,7 @@ Permitted job data source / dataset
               Responsive web dashboard
 ```
 
-### Data model
+### Data model (planned)
 
 | Table | Description |
 |---|---|
@@ -154,21 +157,21 @@ The schema may evolve with implementation.
 
 ## Installation and Quick Start
 
-> The commands below are a starting template. Update them to match the actual repository structure, dependency files, and entry points.
+> The repository currently contains no application code, so there is nothing to run yet. The steps below set up the development environment and will work once dependency files are added.
 
 ### Prerequisites
 
 - Python 3.11+
 - Git
 - SQLite (prototype) or PostgreSQL
-- Node.js and npm (if the frontend uses React)
+- Node.js and npm (only if the frontend uses React)
 - API credentials, only if an approved data source requires them
 
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/munibashami07-oss/JobStack-through-python.git
+cd JobStack-through-python
 ```
 
 ### 2. Create and activate a virtual environment
@@ -187,44 +190,31 @@ source .venv/bin/activate
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+### 3. Install dependencies *(available once `requirements.txt` is added)*
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure environment variables
+### 4. Configure environment variables *(available once `.env.example` is added)*
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your values (see [Configuration](#configuration)).
-
-### 5. Initialize the database
+### 5. Run the application *(planned)*
 
 ```bash
-# Replace with the project's actual initialization command
-python -m app.db.init
-```
-
-### 6. Run the application
-
-```bash
-# Backend (FastAPI)
 uvicorn app.main:app --reload
-
-# Frontend (if present)
-cd frontend
-npm install
-npm run dev
 ```
 
-The API is then available at `http://127.0.0.1:8000`, with interactive docs at `/docs`.
+The entry point `app.main:app` is a placeholder and will be confirmed when the backend is added.
 
 ---
 
 ## Usage Examples and Configuration
+
+> **Planned.** The examples below show the intended interface. Endpoints and module names are illustrative and not yet implemented.
 
 ### Configuration
 
@@ -238,28 +228,26 @@ Never commit `.env` files or credentials. Keep `.env.example` free of real secre
 ### Example: query the API
 
 ```bash
-# Top skills for a role (illustrative endpoint)
+# Top skills for a role
 curl "http://127.0.0.1:8000/skills/top?role=backend&city=Lahore"
 ```
 
 ```bash
-# Job-fit score for a candidate profile (illustrative endpoint)
+# Job-fit score for a candidate profile
 curl -X POST "http://127.0.0.1:8000/fit" \
   -H "Content-Type: application/json" \
   -d '{"skills": ["python", "sql", "fastapi"], "target_role": "data engineer"}'
 ```
 
-Expected output includes a fit score, matched skills, missing skills, and prioritized skill gaps.
+The fit response is intended to include a score, matched skills, missing skills, and prioritized skill gaps.
 
-### Example: run the pipeline
+### Example: run the data pipeline
 
 ```bash
 python -m pipeline.ingest --source <permitted-source>
 python -m pipeline.clean
 python -m pipeline.load
 ```
-
-> Endpoint paths and module names above are placeholders. Replace them as the implementation is finalized.
 
 ---
 
@@ -271,26 +259,30 @@ _To be added._
 
 ## Contributing
 
-Contributions are welcome in data engineering, analytics, machine learning, backend, frontend, documentation, and testing.
+Contributions are welcome in data engineering, analytics, machine learning, backend, frontend, documentation, and testing. As the project is at an early stage, the most useful contributions right now are schema design, data-source review, and project structure.
 
 ### How to contribute
 
-1. **Check existing work.** Review open issues and pull requests. For a significant change, open an issue first to agree on scope.
-2. **Fork** the repository if you lack write access.
-3. **Create a focused branch** from the default branch:
+1. **Check existing work.** Review [open issues](https://github.com/munibashami07-oss/JobStack-through-python/issues) and [pull requests](https://github.com/munibashami07-oss/JobStack-through-python/pulls). For a significant change, open an issue first to agree on scope.
+2. **Fork** the repository, then clone your fork:
+   ```bash
+   git clone https://github.com/<your-username>/JobStack-through-python.git
+   cd JobStack-through-python
+   ```
+3. **Create a focused branch** from `main`:
    ```bash
    git checkout -b type/short-description
    ```
    Prefixes: `feature/`, `fix/`, `docs/`, `test/`, `refactor/`, `data/`.
 4. **Make a focused change.** Keep pull requests small; don't mix unrelated refactors and features.
 5. **Add or update tests** for new behavior and bug fixes. For data or model changes, document the expected behavior and evaluation method.
-6. **Run checks locally:** tests, formatter, and linter.
+6. **Run checks locally:** tests, formatter, and linter (once configured).
 7. **Commit with a clear message:**
    ```bash
    git commit -m "feat: add canonical skill normalization"
    ```
    Examples: `fix: handle missing salary ranges`, `test: cover duplicate posting detection`, `docs: clarify local database setup`.
-8. **Push and open a pull request** against the default branch. Describe the problem, solution, how it was tested, and any trade-offs. Link related issues and add screenshots for UI changes.
+8. **Push and open a pull request** against `main`. Describe the problem, solution, how it was tested, and any trade-offs. Link related issues and add screenshots for UI changes.
 9. **Respond to review feedback.**
 
 ### Pull request checklist
