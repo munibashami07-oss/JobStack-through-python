@@ -304,8 +304,12 @@ These sources give context and are not necessarily JobStack's data sources. Any 
 The full raw and validated datasets are too large for GitHub. Download them from Google Drive:
 - arbeitnow_20261014_1917.json → save in data/raw/
 - jobs_valid.json → save in data/validated/
-Link: https://drive.google.com/file/d/17D06lN8BWO9Yki3Csd4P7I_qfricw8Tk/view?usp=sharing
+Links:
+For arbeitnow_20261014_1917.json:-
+ https://drive.google.com/file/d/17D06lN8BWO9Yki3Csd4P7I_qfricw8Tk/view?usp=sharing
+For remotive_20261014_1910.json:-
 https://drive.google.com/file/d/1TR5GATg5TZfPzx9p9L8xaRsLSW18-F4M/view?usp=drive_link
+For Pakistan_jobs.csv file : https://drive.google.com/file/d/1bpqkPq3fgIttTxDKRH-QXgCmTd2UyunZ/view?usp=sharing
 
 
 ## ⭐ Support
