@@ -10,12 +10,17 @@ PREFIXES = ("Full Time", "Part Time", "Contract", "Internship", "Freelance", "Te
 
 
 def clean_title(t: str) -> str:
-    t = re.sub(r"\s+Jobs in Pakistan\s*$", "", t.strip(), flags=re.I)
+    t = re.sub(r"\s+Jobs?\s+in\s+Pakistan\s*$", "", t.strip(), flags=re.I)
     for p in PREFIXES:
         if t.lower().startswith(p.lower() + " "):
             t = t[len(p):].strip()
             break
     return t
+
+
+def _strip_jobs(value: str) -> str:
+    """Drop a trailing 'Job' or 'Jobs' label that the source adds to categories and job types."""
+    return re.sub(r"\s+Jobs?\s*$", "", (value or "").strip(), flags=re.I)
 
 
 def _strip(value: str, suffix: str) -> str:
@@ -54,11 +59,11 @@ def to_record(raw: dict) -> dict:
         "title": clean_title(raw.get("Job Name", "")),
         "description": desc,
         "company_name": company,
-        "category": _strip(raw.get("Department", ""), " Jobs") or None,
+        "category": _strip_jobs(raw.get("Department", "")) or None,
         "city": raw.get("City", "").strip() or None,
         "country": "Pakistan",
         "work_mode": "unknown",
-        "employment_type": _strip(raw.get("Job Type", ""), " Jobs") or None,
+        "employment_type": _strip_jobs(raw.get("Job Type", "")) or None,
         "experience": raw.get("Experience Required", "").strip() or None,
         "posted_at": posted,
         "language": detect_language(desc[:1500]),

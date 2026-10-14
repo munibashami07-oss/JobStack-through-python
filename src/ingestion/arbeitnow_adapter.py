@@ -13,7 +13,9 @@ def to_record(raw: dict) -> dict:
     """Map one Arbeitnow job into the JobPosting schema."""
     title = raw.get("title") or ""
     desc = raw.get("description") or ""
-    if raw.get("remote"):
+    loc = (raw.get("location") or "").strip()
+    loc_is_remote = loc.lower() == "remote"
+    if raw.get("remote") or loc_is_remote:
         mode = "remote"
     elif "hybrid" in title.lower():
         mode = "hybrid"
@@ -30,7 +32,7 @@ def to_record(raw: dict) -> dict:
         "company_name": raw.get("company_name"),
         "category": (raw.get("tags") or [None])[0],
         "tags": raw.get("tags") or [],
-        "city": raw.get("location"),
+        "city": None if (not loc or loc_is_remote) else loc,
         "work_mode": mode,
         "employment_type": ", ".join(raw.get("job_types") or []) or None,
         "posted_at": posted,

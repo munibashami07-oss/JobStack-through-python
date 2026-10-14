@@ -35,6 +35,7 @@ def main():
 
     with sqlite3.connect(DB) as con:
         df = pd.read_sql("SELECT * FROM jobs", con)
+    df = df.replace(r"^\s*$", pd.NA, regex=True)
 
     out = ["# Data quality report", "",
            "Generated from `data/jobstack.db` by `python -m src.validation.quality_report`.", "",
@@ -69,16 +70,26 @@ def main():
     for src in df["source"].unique():
         top = df[df["source"] == src]["city"].value_counts().head(8).reset_index()
         top.columns = ["city", "rows"]
+        if top.empty:
+            continue
         out += [f"## 6. Top cities: {src}", md(top), ""]
     wm = df.groupby(["source", "work_mode"]).size().reset_index(name="rows")
     out += ["## 7. Work mode", md(wm), ""]
 
-    # 8. Duplicate title+company+city inside the final table
-    dup = df.duplicated(subset=["title", "company_name", "city", "source"], keep=False).sum()
-    out += ["## 8. Possible near-duplicates left in the data",
-            f"{dup} rows share the same title, company, city and source. "
-            "They have different ids, so they were kept. Review before analysis.", ""]
-
+    # 8. Possible duplicates inside the final table
+    key = ["title", "company_name", "city", "source"]
+    grp = df[df.duplicated(key, keep=False)].copy()
+    grp["same_time"] = grp.duplicated(key + ["posted_at"], keep=False)
+    dup = grp.groupby(["source", "same_time"]).size().reset_index(name="rows")
+    dup["same_time"] = dup["same_time"].map({
+        True: "same posted_at (likely true duplicates)",
+        False: "different posted_at (likely reposts)",
+    })
+    dup = dup.rename(columns={"same_time": "kind"})
+    out += ["## 8. Possible near-duplicates left in the data", md(dup),
+            "All rows were kept (they have different ids). Reposts on different dates are real "
+            "postings. For counts of unique vacancies, drop duplicates on "
+            "title + company_name + city.", ""]
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(out), encoding="utf-8")
     print(f"Wrote {OUT}")

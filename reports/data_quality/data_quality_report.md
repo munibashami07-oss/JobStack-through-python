@@ -16,7 +16,7 @@ Total validated postings: **8011**. Rejected by validation: see `data/validated/
 |---|---|---|---|
 | company_name | 0.0 | 6.2 | 0.0 |
 | category | 5.2 | 0.0 | 0.0 |
-| city | 0.0 | 0.0 | 100.0 |
+| city | 8.8 | 0.0 | 100.0 |
 | country | 100.0 | 0.0 | 100.0 |
 | candidate_location | 100.0 | 100.0 | 0.0 |
 | work_mode | 0.0 | 0.0 | 0.0 |
@@ -52,21 +52,17 @@ Salary is mostly missing. It is left as null, never 0.
 | remotive | 2026-09-14 | 2026-10-11 |
 Kaggle covers Dec 2019 to Mar 2021; Remotive and Arbeitnow are from October 2026. Do not compare trends across sources without splitting by source.
 
-## 6. Top cities: remotive
-| city | rows |
-|---|---|
-
 ## 6. Top cities: arbeitnow
 | city | rows |
 |---|---|
 | London | 234 |
 | Berlin | 171 |
-| Remote | 149 |
 | Paris | 148 |
 | Amsterdam | 146 |
-|  | 80 |
 | Munich | 71 |
 | Hamburg | 58 |
+| Delft | 54 |
+| United Kingdom | 35 |
 
 ## 6. Top cities: kaggle_pk
 | city | rows |
@@ -83,11 +79,17 @@ Kaggle covers Dec 2019 to Mar 2021; Remotive and Arbeitnow are from October 2026
 ## 7. Work mode
 | source | work_mode | rows |
 |---|---|---|
-| arbeitnow | hybrid | 8 |
-| arbeitnow | remote | 211 |
-| arbeitnow | unknown | 2379 |
+| arbeitnow | hybrid | 7 |
+| arbeitnow | remote | 243 |
+| arbeitnow | unknown | 2348 |
 | kaggle_pk | unknown | 5398 |
 | remotive | remote | 15 |
 
 ## 8. Possible near-duplicates left in the data
-414 rows share the same title, company, city and source. They have different ids, so they were kept. Review before analysis.
+| source | kind | rows |
+|---|---|---|
+| arbeitnow | different posted_at (likely reposts) | 75 |
+| arbeitnow | same posted_at (likely true duplicates) | 33 |
+| kaggle_pk | different posted_at (likely reposts) | 359 |
+| kaggle_pk | same posted_at (likely true duplicates) | 10 |
+All rows were kept (they have different ids). Reposts on different dates are real postings. For counts of unique vacancies, drop duplicates on title + company_name + city.

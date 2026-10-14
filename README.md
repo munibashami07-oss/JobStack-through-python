@@ -15,7 +15,7 @@
 
 ## 🚧 Project status
 
-JobStack is in **early development**. The repository currently contains documentation only. Everything marked 🗓️ *Planned* describes the intended design and will be updated as code is added.
+JobStack is in **early development**. Project 1, step 1 (data acquisition and validation) is implemented: ingestion adapters, Pydantic validation, tests and a data quality report. Everything else marked 🗓️ *Planned* describes the intended design and will be updated as code is added.
 
 ---
 
@@ -103,7 +103,7 @@ flowchart LR
 
 | Stage | Focus | Status |
 |---|---|---|
-| 1️⃣ Data foundation | ETL, validation, SQL, EDA | ⬜ Not started |
+| 1️⃣ Data foundation | ETL, validation, SQL, EDA | 🟨 In progress |
 | 2️⃣ Classical ML | Salary estimation and job-fit baseline | ⬜ Not started |
 | 3️⃣ Deep learning and MLOps | PyTorch matching, Optuna, MLflow | ⬜ Not started |
 | 🖥️ Product layer | Web app and REST API | ⬜ Not started |
@@ -113,7 +113,7 @@ flowchart LR
 
 ## 🚀 Quick start
 
-> ⚠️ The repo has no application code yet, so there is nothing to run. These steps set up your environment and will work once dependency files are added.
+> ⚠️ The data acquisition and validation step can be run now (see "Run the data pipeline" below). The API and web app are planned.
 
 **1. 📦 Clone the repository**
 
@@ -138,13 +138,13 @@ source .venv/bin/activate
 .\.venv\Scripts\Activate.ps1
 ```
 
-**3. 📥 Install dependencies** *(once `requirements.txt` is added)*
+**3. 📥 Install dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**4. 🔐 Configure environment** *(once `.env.example` is added)*
+**4. 🔐 Configure environment** *(not needed for the current data sources)*
 
 ```bash
 cp .env.example .env
@@ -185,13 +185,33 @@ curl -X POST "http://127.0.0.1:8000/fit" \
   -d '{"skills": ["python", "sql", "fastapi"], "target_role": "data engineer"}'
 ```
 
-### 🏭 Run the data pipeline
+### 🏭 Run the data pipeline (Project 1: data acquisition and validation)
+
+No API key or `.env` file is needed for the current sources.
 
 ```bash
-python -m pipeline.ingest --source <permitted-source>
-python -m pipeline.clean
-python -m pipeline.load
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. (Optional) fetch fresh API snapshots into data/raw/
+python -m src.ingestion.fetch_arbeitnow
+python -m src.ingestion.fetch_remotive
+
+# 3. Validate raw data -> data/validated/jobs_valid.json
+python -m src.validation.run_all
+
+# 4. Load a flat table for the quality report (not the final database)
+python -m src.ingestion.load_db
+
+# 5. Generate the report -> reports/data_quality/data_quality_report.md
+python -m src.validation.quality_report
+
+# Run the tests
+python -m pytest
 ```
+
+Sources, terms and limits: `reports/data_quality/source_notes.md`.
+Field definitions for the next pipeline step: `reports/data_quality/data_contract.md`.
 
 ---
 
