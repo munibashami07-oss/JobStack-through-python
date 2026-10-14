@@ -6,7 +6,7 @@ from pydantic import BaseModel, field_validator, model_validator
 
 class JobPosting(BaseModel):
     posting_id: str
-    source: Literal["remotive", "kaggle_pk"]
+    source: Literal["remotive", "arbeitnow", "kaggle_pk"]
     source_url: Optional[str] = None
     title: str
     description: str
@@ -24,6 +24,7 @@ class JobPosting(BaseModel):
     currency: Optional[str] = None
     salary_text: Optional[str] = None
     posted_at: Optional[datetime] = None
+    language: Optional[Literal["en", "de"]] = None
 
     @field_validator("title", "description")
     @classmethod
