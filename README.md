@@ -284,4 +284,4 @@ These sources give context and are not necessarily JobStack's data sources. Any 
 
 If JobStack is useful to you, give the repo a **star** ⭐ and share it with someone exploring the tech job market.
 
-Made with ❤️ by **[Muniba](https://github.com/munibashami07-oss)**
+Made with ❤️ by **[Imama](https://github.com/Fatima-09-ai)**
