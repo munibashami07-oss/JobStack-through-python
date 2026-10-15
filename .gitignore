@@ -10,3 +10,4 @@ data/validated/jobs_valid.json
 data/raw/pakistan_jobs.csv
 data/raw/*
 !data/raw/.gitkeep
+.env
