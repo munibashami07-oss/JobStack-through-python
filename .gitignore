@@ -1,0 +1,10 @@
+data/jobstack.db
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+desktop.ini
+data/raw/arbeitnow_*.json
+data/validated/jobs_valid.json
+data/raw/pakistan_jobs.csv
