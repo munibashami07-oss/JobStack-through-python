@@ -11,3 +11,4 @@ data/raw/pakistan_jobs.csv
 data/raw/*
 !data/raw/.gitkeep
 .env
+data/jobstack_final.db
