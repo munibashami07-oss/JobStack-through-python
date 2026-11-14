@@ -311,4 +311,4 @@ These sources give context and are not necessarily JobStack's data sources. Any 
 
 If JobStack is useful to you, give the repo a **star** ⭐ and share it with someone exploring the tech job market.
 
-Made with ❤️ by **[Imama](https://github.com/Fatima-09-ai)**
+Made with ❤️ by **[Muniba](https://github.com/munibashami07-oss)**, **[Imama](https://github.com/Fatima-09-ai)**, **[Wajiha](https://github.com/fatimawajiha46-coder)** and **[Ali Anns](https://github.com/alianns351-ops)**
