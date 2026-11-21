@@ -17,6 +17,6 @@
     "vite": "^5.1.4"
   },
   "allowScripts": {
-    "esbuild": "true"
+    "esbuild": true
   }
 }
