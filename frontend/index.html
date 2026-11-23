@@ -13,6 +13,13 @@
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <style>.seg-entry{background:#efede6;color:#0b0b0c}.seg-mid{background:#88867f;color:#fff}.seg-notstated{background:#d0cec5;color:#0b0b0c}</style>
+<style>
+/* Employment page: white cards with hard shadow, same look as the Skills deep-dive card */
+.employment-view .card:not(.kpi),.employment-view .card:not(.kpi):has(.row:hover){background:#fff;box-shadow:6px 6px 0 var(--black)}
+.employment-view .kpi:not(:hover){background:#fff;box-shadow:6px 6px 0 var(--black)}
+.employment-view .row{grid-template-columns:104px 1fr 78px}
+.employment-view .row span,.employment-view .row i{overflow-wrap:anywhere;font-size:.8rem}
+</style>
 </head>
 <body>
 
